@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#show').load('hello.txt', function(result){//1텍스트값, 2?, 3오브젝트 리턴 
+                // console.log(result);
+            });
+            $.get('get.json', function(result){ //바로 phase파싱을 바로 해버림 
+                // console.log(result);
+                let ul = $('<ul />');
+                for(let row of result){
+                    $(ul).append($('<li />').html(row.id+' '+row.first_name + ' '+row.last_name));
+                }
+                $('#display').append(ul);
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div id="show"></div>
+    <div id="display"></div>
+</body>
+</html>

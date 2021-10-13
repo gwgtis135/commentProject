@@ -7,9 +7,18 @@
     <title>jquery/select_fnc.html</title>
     <script src="../jquery-3.6.0.min.js"></script>
     <script>
+
+
              $(function () {
             // $('button').click(filterFnc);
-            $('button').click(findFnc);
+            $('button').eq(0).click(findFnc);   //요소찾기.
+            $('button').eq(1).click(function(){ //체크라인  삭제
+                $('tbody>tr>td>input').filter(':checked').parentsUntil('tbody').remove();
+                
+                // let checkVal = $('tbody>tr>td>input');
+                // console.log(checkVal);
+                // $(checkVal).filter(':checked').parent().parent().remove();
+            })
                  });
 
             function findFnc(){
@@ -52,6 +61,7 @@
 <body>
     <div id="show"></div>
     <button>클릭</button>
+    <button>삭제</button>
     <script>
         fetch('coffee.json')
             .then(x=> x.json())
