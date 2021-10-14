@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>cookie/cookie.html</title>
+</head>
+<body>
+	<button>Login</button>
+	<button>Logout</button>
+	<button>Check</button>
+	
+	<script>
+		let storedUsers = [
+			{name: '홍길동', id: 'hong', pw: '1111'},
+			{name: '김민수', id: 'kim', pw: '2222'},
+			{name: '박순억', id: 'park', pw: '3333'},
+			]
+		//로그인 실패 의미 
+		function login(id, passwd){
+			for(let i =0; i<storedUsers.length;i++){
+				if(id === storedUsers[i].id && passwd ===  storedUsers[i].pw){
+				return storedUsers[i];
+				break;
+				}
+			}
+		return null;
+		}
+		
+		function logout(){
+			document.cookie = 'username=; expires=0; path=/';
+			document.cookie = 'userid=; expires=0; path=/'
+		}
+		//쿠키가 언제까지 있을 껀지 
+		function setCookie(cname, cval){
+			const times = 3;	// 1시간 의미 타임은 밀리세컨드 
+			const d = new Date();
+			d.setTime(d.getTime()+ 1000 * 60); //1000* 60 1분  * 60 1시간 * times 원하는 시간 
+			document.cookie = cname  + '=' + cval + '; expires=' + d.toUTCString + '; path=/';
+			// username=hongkil; expires=2021 10 14 : 12:00:00; path=/
+			//userid = hong; expires = 2021 10 14 12:00:00; path=/
+			//username = hongkil; userid=hong; userinfo=????
+		}
+		
+		
+		
+		function getCookie(cname) {
+			let cookies = document.cookie.split('; ');
+			for (let i = 0; i < cookies.length; i++) {
+				if (cookies[i].indexOf(cname) === 0) {
+					let result = cookies[i].substring(cname.length + 1);
+					return result;
+				}
+			}
+			return null; //값이 없으면 null 리턴 
+
+		}
+
+		
+		let btns = document.getElementsByTagName('button');
+
+		//Login 버튼 
+		btns[0].onclick = function() {
+			let info = login('hong', '1111');
+			if (info) {
+				alert('로그인 성공');
+				console.log(info.name);
+				setCookie('username', info.name)
+				//document.cookie = "username" + info.name;
+			} else {
+				alert('로그인 실패!!!');
+			}
+
+		}
+		
+		//Logout 버튼
+		btns[1].onclick = function(){
+			logout();
+			alert('logout 완료');
+		}
+
+		//Check버튼
+		btns[2].onclick = function(){
+			let result = getCookie('username');
+			result =  
+			console.log(result);
+			
+		}
+	</script>
+</body>
+</html>
