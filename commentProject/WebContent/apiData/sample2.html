@@ -33,9 +33,13 @@
              city:'대전광역시'
             },
             {code:'대구', city:'대구광역시'},
+            {code:'광주', city:'광주광역시'},
+            {code:'전라', city:'전라북도'},
             {code:'울산', city:'울산광역시'},
-
-            {code:'부산', city:'부산광역시'}
+            {code:'경남', city:'경상남도'},
+            {code:'부산', city:'부산광역시'},
+            {code:'제주', city:'제주특별자치도'}
+            
         ];
 
         for(let category of categories){
@@ -46,7 +50,7 @@
 
         function chooseCity(cityName){
 
-            $('#city>.city').removeClass('acative'); //엑티브 속성 제거 
+            $('#city>.city').removeClass('active'); //엑티브 속성 제거 
 
             $(event.target).parent().addClass('active');   //누를 때 마다 색깔 바꿀려고 
 
@@ -78,7 +82,7 @@
             $('<td />').html(row.centerName),//
             $('<td />').html(row.sido),//
             $('<td />').html(row.facilityName),//
-            $('<td />').html('<a href="daum_map.jsp?x='+row.lat+'&y='+row.lng+'" target="_blank">지도</a>')//a태그로 html 만들려고 한다. , 물음표가 x_pos값임 
+            $('<td />').html('<a href="daum_map.jsp?&fname='+row.facilityName+'&x='+row.lat+'&y='+row.lng+'" target="_blank">지도</a>')//a태그로 html 만들려고 한다. , 물음표가 x_pos값임 
             
             );
             return div;
@@ -87,7 +91,7 @@
         //api데이터 -> cities 배열에 저장.
         let cities = [];
         $.ajax({
-            url:'open_api.json',
+            url:'../SampleDaraSerlvler2',
             dataType:'json',
             success: function(result){
 

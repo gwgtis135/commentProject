@@ -28,7 +28,7 @@ public class CommentDAO extends DAO {
 			while(rs.next()) {
 				Comment cmt = new Comment();
 				cmt.setId(rs.getString("id"));
-				cmt.setContent(rs.getString("content"));
+				cmt.setContent(rs.getString("pw"));
 				cmt.setName(rs.getString("name"));
 				list.add(cmt);
 			}
